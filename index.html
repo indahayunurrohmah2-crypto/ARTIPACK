@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ARTIPACK - Portal Pembeli</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    header, footer { text-align: center; padding: 10px; background: #f4a261; color: white; }
+    nav a { margin: 0 15px; color: #264653; text-decoration: none; font-weight: bold;}
+    nav a:hover { text-decoration: underline; }
+    form { max-width: 500px; margin: 20px auto; background: #fefae0; padding: 15px; border-radius: 10px; box-shadow: 0 0 5px #ccc;}
+    label { display: block; margin-top: 10px; }
+    input, textarea, select { width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; }
+    button { margin-top: 15px; width: 100%; padding: 10px; background: #2a9d8f; border: none; color: white; font-weight: bold; cursor: pointer; border-radius: 5px;}
+    button:hover { background: #21867a; }
+    .info { background: #ffe066; padding: 10px; border-radius: 5px; margin: 15px 0; font-style: italic; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>ARTIPACK</h1>
+  <p>Produk Bangkalan Madura - Camilan Seru dan Kekinian</p>
+</header>
+
+<nav>
+  <a href="index.html">Beranda</a>
+  <a href="contact.html">Contact</a>
+  <a href="about.html">Tentang Kami</a>
+</nav>
+
+<main>
+  <h2>Pesan Produk ARTIPACK</h2>
+  <form id="orderForm">
+    <label for="nama">Nama Lengkap</label>
+    <input type="text" id="nama" name="nama" required />
+
+    <label for="orderan">Pilih Menu (Mix Rasa)</label>
+    <select id="orderan" name="orderan" required>
+      <option value="">-- Pilih --</option>
+      <option value="mix rasa 1">Mix Rasa 1</option>
+      <option value="mix rasa 2">Mix Rasa 2</option>
+      <option value="mix rasa 3">Mix Rasa 3</option>
+    </select>
+
+    <label for="tanggalPemesanan">Tanggal Pemesanan</label>
+    <input type="date" id="tanggalPemesanan" name="tanggalPemesanan" required />
+
+    <label for="pembayaran">Pembayaran</label>
+    <select id="pembayaran" name="pembayaran" required onchange="toggleBankTransfer()">
+      <option value="">-- Pilih --</option>
+      <option value="cash">Cash</option>
+      <option value="transfer">Transfer</option>
+    </select>
+
+    <div id="transferDetails" style="display:none; margin-top: 10px; padding: 10px; border: 1px solid #2a9d8f; border-radius: 5px; background-color: #d7f9f7;">
+      <p><strong>Transfer via BANK BRI: 6562 0103 3791 535</strong></p>
+      <p>Dana: 085236509382</p>
+      <p>Shopee Pay: 085801312239</p>
+    </div>
+
+    <label for="pengiriman">Pengiriman</label>
+    <select id="pengiriman" name="pengiriman" required>
+      <option value="delivery">Delivery</option>
+    </select>
+
+    <label for="tanggalPengiriman">Tanggal Pengiriman</label>
+    <input type="text" id="tanggalPengiriman" name="tanggalPengiriman" value="Jumat jam 19.00" readonly />
+
+    <label for="alamat">Alamat Lengkap (Share Lokasi di Maps)</label>
+    <textarea id="alamat" name="alamat" placeholder="Masukkan alamat lengkap dan share lokasi peta" required></textarea>
+
+    <label for="noWhatsapp">Nomor WhatsApp</label>
+    <input type="tel" id="noWhatsapp" name="noWhatsapp" placeholder="08xxxxxxxxxx" required />
+
+    <label for="catatan">Catatan Tambahan</label>
+    <textarea id="catatan" name="catatan"></textarea>
+
+    <div class="info">
+      Info penting: Delivery hari Jumat jam 19.00, delivery gratis untuk area terdekat hingga 5 km.
+    </div>
+
+    <button type="submit">Check Out</button>
+  </form>
+</main>
+
+<footer>
+  <p>&copy; 2026 ARTIPACK - Bangkalan Madura</p>
+</footer>
+
+<script>
+  function toggleBankTransfer() {
+    const pembayaran = document.getElementById('pembayaran').value;
+    const transferDetails = document.getElementById('transferDetails');
+    transferDetails.style.display = (pembayaran === 'transfer') ? 'block' : 'none';
+  }
+
+  document.getElementById('orderForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    // Simulasi proses checkout dan pindah ke halaman pembayaran jika transfer
+    const pembayaran = this.pembayaran.value;
+    if (pembayaran === 'transfer') {
+      alert('Terima kasih sudah pesan, silakan lanjut ke pembayaran dan unggah bukti transfer di halaman berikutnya.');
+      window.location.href = 'payment.html'; // buat halaman payment.html untuk menangani pembayaran
+    } else {
+      alert('Pesanan berhasil dibuat dengan pembayaran Cash. Terima kasih!');
+      // Redirect atau aksi lain untuk pembayaran cash
+    }
+  });
+</script>
+
+</body>
+</html>
